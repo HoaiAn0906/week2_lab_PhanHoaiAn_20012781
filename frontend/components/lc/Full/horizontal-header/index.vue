@@ -1,23 +1,17 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import {useCustomizerStore} from "@/stores/customizer";
+import {useCartStore} from "@/stores/carts";
 
 const customizer = useCustomizerStore()
 const priority = ref(customizer.setHorizontalLayout ? 0 : 0)
-const bg = ref('#FFFFFF00')
-const changeColor = () => {
-  if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-    bg.value = '#3c6176'
-  } else {
-    bg.value = '#FFFFFF00'
-  }
-}
+const bg = ref('#3c6176')
 
-onMounted(() => {
-  window.onscroll = () => {
-    changeColor()
-  }
-})
+const cartStore = useCartStore()
+
+//use getters do get data from store
+const cartItems = computed(() => cartStore.getCart)
+
 </script>
 
 <template>
@@ -99,9 +93,9 @@ onMounted(() => {
           </v-card>
         </v-menu>
 
-        <v-btn class="tw-uppercase" color="primary" height="44" variant="flat">
+        <v-btn class="tw-uppercase" color="primary" height="44" variant="flat" :to="{ name: 'carts' }">
           <v-icon color="white" size="24">mdi-cart-arrow-down</v-icon>
-          <span class="tw-text-white tw-font-bold tw-ml-1"></span>
+          <span class="tw-text-white tw-font-bold tw-ml-1">{{ cartItems.length }}</span>
         </v-btn>
       </div>
     </div>

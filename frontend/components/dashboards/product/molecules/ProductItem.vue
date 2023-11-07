@@ -1,10 +1,22 @@
 <script setup>
+import {useCartStore} from "@/stores/carts";
+
 const props = defineProps({
   product: {
     type: Object,
     required: true,
   },
+  type: {
+    type: String,
+    default: 'index'
+  }
 })
+
+const cartStore = useCartStore()
+
+const addToCart = () => {
+  cartStore.ADD_TO_CART(props.product)
+}
 </script>
 <template>
   <div class="tw-block md:tw-flex tw-b-4 tw-py-3 product-item tw-gap-3">
@@ -48,8 +60,11 @@ const props = defineProps({
           </div>
         </div>
       </div>
-      <v-btn class="tw-mt-8 tw-float-right" color="primary">
+      <v-btn v-if="type === 'index'" class="tw-mt-8 tw-float-right" color="primary">
         <span class="tw-text-[13px]">Buy</span>
+      </v-btn>
+      <v-btn v-if="type === 'index'" class="tw-mt-8 tw-float-right tw-mr-2" color="primary" variant="outlined" @click="addToCart">
+        <span class="tw-text-[13px]">Add to cardt</span>
       </v-btn>
     </div>
   </div>
