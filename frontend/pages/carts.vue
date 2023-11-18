@@ -1,11 +1,26 @@
 <script setup lang="ts">
 import {useCartStore} from "@/stores/carts";
-import ProductItem from "~/components/dashboards/product/molecules/ProductItem.vue";
+import ProductItem from "@/components/dashboards/product/molecules/ProductItem.vue";
 
+const { $api } = useNuxtApp()
 const cartStore = useCartStore()
 
 const cartItems = computed(() => cartStore.getCart)
 const cartTotal = computed(() => cartStore.getCartTotal)
+
+const payment = () => {
+  const order = {
+    custormer_id: 1,
+    employee_id: 1,
+    order_date: new Date(),
+  }
+  //fix cors error
+  $api.orders.createOrder(order).then(res => {
+    console.log(res)
+  }).catch(err => {
+    console.log(err)
+  })
+}
 </script>
 
 <template>
@@ -37,7 +52,7 @@ const cartTotal = computed(() => cartStore.getCartTotal)
 <!--    btn payment-->
     <div class="tw-flex tw-justify-end tw-mt-3">
       <v-btn color="primary">
-        <span class="tw-text-[13px]">Payment</span>
+        <span class="tw-text-[13px]" @click="payment">Payment</span>
       </v-btn>
     </div>
   </div>

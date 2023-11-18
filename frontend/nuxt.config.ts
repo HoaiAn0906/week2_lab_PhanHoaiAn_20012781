@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 // @ts-ignore
+
 export default defineNuxtConfig({
   ssr: false,
   devtools: { enabled: true },
@@ -18,8 +19,14 @@ export default defineNuxtConfig({
     //   extractCSS: false,
     transpile: ['vuetify'],
   },
-  modules: ['@pinia/nuxt', '@nuxt/devtools', '@nuxtjs/tailwindcss'],
+  modules: ['@pinia/nuxt', '@nuxt/devtools', '@nuxtjs/tailwindcss', '@sidebase/nuxt-auth'],
   plugins: ['@/plugins/axios', '@/plugins/api'],
+  auth: {
+    origin: process.env.ORIGIN,
+    enableGlobalAppMiddleware: true,
+    enableSessionRefreshPeriodically: false,
+    enableSessionRefreshOnWindowFocus: true,
+  },
   app: {
     head: {
       title: 'AdminPro Nuxt 3 - Vuetify 3 - vite - Typescript Based Admin Dashboard Template',

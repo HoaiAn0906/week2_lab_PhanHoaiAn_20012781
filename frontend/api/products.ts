@@ -16,4 +16,8 @@ export class ProductsAPI extends BaseApi {
     deleteProduct(id: any): Promise<any> {
         return this.delete(`/products/${id}`)
     }
+
+    getChartPriceByTime(id: any, params: any): Promise<any> {
+        return this.get(`/products/${id}/chartPriceByTime`, { params })
+    }
 }

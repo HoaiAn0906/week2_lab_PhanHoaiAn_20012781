@@ -6,6 +6,7 @@ import www.week2.week02_lab_phanhoaian_20012781.repositories.ProductRepository;
 import www.week2.week02_lab_phanhoaian_20012781.services.ProductService;
 
 import java.util.List;
+import java.util.Map;
 
 public class ProductServiceImpl implements ProductService {
     @Inject
@@ -28,5 +29,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public boolean delete(long id) {
         return productRepository.delete(id, Product.class);
+    }
+
+    @Override
+    public Map<String, List<Object>> getChartPriceByTime(long id) {
+        return productRepository.getChartPriceByTime(id);
     }
 }

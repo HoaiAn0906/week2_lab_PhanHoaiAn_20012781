@@ -16,6 +16,12 @@ const breadcrumbs = ref([
     href: '#',
   },
 ])
+
+const { data } = useAuth()
+
+onMounted(() => {
+  console.log(data)
+})
 </script>
 
 <template>

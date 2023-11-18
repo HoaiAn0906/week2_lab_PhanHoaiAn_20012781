@@ -66,6 +66,9 @@ const addToCart = () => {
       <v-btn v-if="type === 'index'" class="tw-mt-8 tw-float-right tw-mr-2" color="primary" variant="outlined" @click="addToCart">
         <span class="tw-text-[13px]">Add to cardt</span>
       </v-btn>
+      <v-btn class="tw-mt-8 tw-float-right tw-mr-2" variant="outlined" color="primary" :to="{ name: 'chart-product-id', params: { id: product.product_id } }">
+        <span class="tw-text-[13px]">Chart Price</span>
+      </v-btn>
     </div>
   </div>
   <v-divider class="my-1" />
